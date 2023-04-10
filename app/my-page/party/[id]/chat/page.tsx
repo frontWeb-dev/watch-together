@@ -1,7 +1,3 @@
-import { NextPage } from 'next/types';
-
-const page: NextPage = () => {
+export default function Page() {
   return <div>채팅</div>;
-};
-
-export default page;
+}

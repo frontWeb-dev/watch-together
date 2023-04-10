@@ -1,7 +1,3 @@
-import { NextPage } from 'next/types';
-
-const page: NextPage = () => {
+export default function Page() {
   return <div>사용자 정보</div>;
-};
-
-export default page;
+}
