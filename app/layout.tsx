@@ -9,7 +9,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='ko'>
       <body>
-        <div className='max-w-md w-full mx-auto bg-white'>{children}</div>
+        <div className='mx-auto w-full max-w-md bg-white'>
+          <div>{children}</div>
+        </div>
       </body>
     </html>
   );
