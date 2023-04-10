@@ -1,7 +1,7 @@
 import { NextPage } from 'next/types';
 
 const page: NextPage = () => {
-  return <div>메인 페이지</div>;
+  return <div>OTT 플랫폼 선택</div>;
 };
 
 export default page;
