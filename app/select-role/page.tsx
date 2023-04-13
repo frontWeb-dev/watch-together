@@ -4,14 +4,14 @@ import { useState } from "react";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import { joinClass } from "@/libs/client/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Page() {
   const router = useRouter();
   const [isLeader, setIsLeader] = useState(false);
   const nextSelect = () => {
     // state에 role 담아서 보내기 {state: {role: isLeader}}
-    router.push("/select-service");
+    router.push(`/select-service?role=${isLeader}`);
   };
   return (
     <>
