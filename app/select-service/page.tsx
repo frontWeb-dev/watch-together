@@ -2,15 +2,24 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import { services } from "@/mocks/service";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
+  const router = useRouter();
   const [ottId, setOttId] = useState(0);
   const searchParams = useSearchParams();
   const role = searchParams.get("role");
 
-  console.log(role);
+  const clickNext = () => {
+    // 서버에 user 정보, 선택한 역할 및 ott 정보 보내기
+    const body = { role, ottId };
+
+    // 파티장 -> 파티 등록 페이지, 파티원 -> 파티 리스트
+    if (role === "true") router.push("/add-party");
+    else router.push("/party");
+  };
+
   return (
     <>
       <Header title="OTT 플랫폼을 선택하세요" goBack="/select-role" />
@@ -25,7 +34,7 @@ export default function Page() {
             <h3 className="text-lg font-bold">{service.name}</h3>
             {ottId === service.id && (
               <p>
-                월 이용료 : <span>{service.pay.toLocaleString("ko-kr")} 원</span>
+                월 이용료 : <span>{service?.pass?.toLocaleString("ko-kr")} 원</span>
                 <br />
                 가치와치에서는
                 <span className="font-bold">
@@ -41,7 +50,7 @@ export default function Page() {
           </div>
         ))}
 
-        <Button text="다음" common large />
+        <Button onClick={clickNext} text="다음" common large />
       </div>
     </>
   );
