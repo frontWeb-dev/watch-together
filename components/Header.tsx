@@ -13,9 +13,9 @@ export default function Header({ goBack, title }: HeaderProps) {
   };
 
   return (
-    <header className="z-1000 fixed flex h-14 w-full max-w-md items-center justify-center bg-white py-4 shadow-sm">
+    <header className="fixed z-[1000] flex h-14 w-full max-w-md items-center justify-center bg-white py-4 shadow-sm">
       {goBack && (
-        <button onClick={() => clickBack(goBack)} className="absolute left-4">
+        <button onClick={() => clickBack(goBack)} className="absolute left-4 cursor-pointer">
           <span className="sr-only">뒤로가기</span>
           <MdKeyboardArrowLeft size={30} />
         </button>

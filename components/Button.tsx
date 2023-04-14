@@ -14,7 +14,7 @@ export default function Button({ large, common, text, onclick, ...rest }: Button
       onClick={onclick}
       {...rest}
       className={joinClass(
-        "relative rounded-lg text-white",
+        "relative rounded-xl text-white",
         large ? "w-full py-3" : "w-[48%] py-2",
         common ? "bg-blue-500" : "bg-black"
       )}
