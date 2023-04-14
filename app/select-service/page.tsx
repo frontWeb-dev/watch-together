@@ -12,11 +12,8 @@ export default function Page() {
   const role = searchParams.get("role");
 
   const clickNext = () => {
-    // 서버에 user 정보, 선택한 역할 및 ott 정보 보내기
-    const body = { role, ottId };
-
     // 파티장 -> 파티 등록 페이지, 파티원 -> 파티 리스트
-    if (role === "true") router.push("/add-party");
+    if (role === "true") router.push(`/add-party?ottId=${ottId}`);
     else router.push("/party");
   };
 
