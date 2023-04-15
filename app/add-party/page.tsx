@@ -39,7 +39,7 @@ const page: NextPage = () => {
   }, [invite]);
 
   return (
-    <div className="relative h-screen">
+    <div className="relative min-h-screen">
       <Header title="파티 모집하기" goBack="/select-service?role=true" />
 
       <div className="px-4 pt-20">
