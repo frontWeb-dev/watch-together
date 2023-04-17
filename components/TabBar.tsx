@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 export default function TabBar() {
   const pathname = usePathname();
-  console.log(pathname);
+
   return (
     <div className="fixed bottom-0 mx-auto flex h-20 w-full max-w-md justify-between bg-white px-6 shadow-inner shadow-md">
       {tabs.map((tab) => (
