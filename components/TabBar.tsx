@@ -7,7 +7,7 @@ export default function TabBar() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed bottom-0 mx-auto flex h-20 w-full max-w-md justify-between bg-white px-6 shadow-inner shadow-md">
+    <div className="fixed bottom-0 mx-auto flex h-20 w-full max-w-md justify-between bg-white px-6 shadow-inner">
       {tabs.map((tab) => (
         <div
           key={tab.id}
