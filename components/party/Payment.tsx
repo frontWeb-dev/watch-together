@@ -8,9 +8,10 @@ export default function Payment({ payment }: PaymentProps) {
   const joinParty = () => {
     // 서버 실행 함수
     try {
-      payment(false);
     } catch (error) {
       console.log('파티에 가입하지 못했습니다.');
+    } finally {
+      payment(false);
     }
   };
 
@@ -48,8 +49,8 @@ export default function Payment({ payment }: PaymentProps) {
           </p>
         </div>
         <div className='flex justify-between'>
-          <Button text='취소하기' warning />
-          <Button text='신청하기' common />
+          <Button onclick={() => payment(false)} text='취소하기' warning />
+          <Button onclick={joinParty} text='신청하기' common />
         </div>
       </div>
     </>
