@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import Header from "../Header";
+import ListText from "../listText";
 
 interface PaymentProps {
   payment: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,24 +32,12 @@ export default function Payment({ payment }: PaymentProps) {
         </div>
         <div className="space-y-4 rounded-lg border p-4 shadow-sm">
           <h2 className="border-b pb-1 text-center text-lg font-bold">결제 정보</h2>
-          <p className="flex justify-between">
-            파티 모집 명 <span></span>
-          </p>
-          <p className="flex justify-between">
-            월 플랫폼 이용료 <span></span>
-          </p>
-          <p className="flex justify-between">
-            월 파티원 이용료 <span></span>
-          </p>
-          <p className="flex justify-between">
-            결제 금액 <span></span>
-          </p>
-          <p className="flex justify-between">
-            보유 캐시 <span></span>
-          </p>
-          <p className="flex justify-between">
-            결제 후 잔액 <span></span>
-          </p>
+          <ListText label="파티 모집 명" text="파티 모집" />
+          <ListText label="월 플랫폼 이용료" text="2,000원" />
+          <ListText label="월 파티원 이용료" text="900원" />
+          <ListText label="결제 금액" text="2,900원" warning />
+          <ListText label="보유 캐시" text="50,000원" />
+          <ListText label="결제 후 잔액" text="47,100원" success />
         </div>
         <div className="flex justify-between">
           <Button onclick={() => payment(false)} text="취소하기" warning />
