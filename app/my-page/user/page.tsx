@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -24,7 +25,9 @@ export default function Page() {
             캐시잔액
             <div>
               <span className="mr-4">0 원</span>
-              <button className="rounded-lg bg-blue-500 px-2 py-1 text-white">충전하기</button>
+              <Link href="/my-page/charge" className="rounded-lg bg-blue-500 p-2 text-white">
+                충전하기
+              </Link>
             </div>
           </p>
         </div>

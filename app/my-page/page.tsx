@@ -26,7 +26,7 @@ export default function Page() {
             </Link>
           </li>
           <li className="w-full">
-            <Link href="/my-page/payment" className="flex justify-between border-b py-4">
+            <Link href="/my-page/payment-list" className="flex justify-between border-b py-4">
               결제 내역
               <span>아이콘</span>
             </Link>
