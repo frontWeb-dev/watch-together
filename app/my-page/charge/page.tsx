@@ -25,7 +25,7 @@ export default function Page() {
 
   return (
     <div className="relative min-h-screen">
-      <Header title="캐시 충전" goBack="/my-page" />
+      <Header title="캐시 충전" goBack="/my-page/user" />
       <div className="space-y-4 px-4 pb-10 pt-20">
         <div className="space-y-4 rounded-lg border p-4 shadow-sm">
           <h2 className="border-b pb-1 text-center text-lg font-bold">충전 금액</h2>
