@@ -1,9 +1,11 @@
+import { NextApiRequest, NextApiResponse } from "next";
+import bcrpyt from "bcrypt";
 import client from "@/libs/server/client";
 import { withHandler } from "@/libs/server/withHandler";
-import { NextApiRequest, NextApiResponse } from "next";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { nickname, email, password } = req.body;
+  const hashedPassword = await bcrpyt.hash(password, 10);
 
   const existEmail = await client.users.findUnique({
     where: {
@@ -35,7 +37,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     data: {
       email,
       nickname,
-      password,
+      password: hashedPassword,
       cash: 0,
     },
   });

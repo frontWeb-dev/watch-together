@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import { useEffect } from "react";
-import { signUpAPI } from "@/api/users";
+import useFetch from "@/libs/client/useFetch";
+import { ToastContainer, toast } from "react-toastify";
 
 interface SignUpForm {
   nickname: string;
@@ -14,10 +15,12 @@ interface SignUpForm {
 
 export default function SignInForm() {
   const router = useRouter();
+  const [signUpAPI, { data, error }] = useFetch("/api/users/sign-up");
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<SignUpForm>({ mode: "onChange" });
 
@@ -27,11 +30,33 @@ export default function SignInForm() {
       nickname: formData.nickname,
       password: formData.password,
     };
-    await signUpAPI(body).then((res) => console.log(res));
+    signUpAPI(body);
+    reset();
   };
+
+  useEffect(() => {
+    if (data && data.errorCode) {
+      toast.error(<h1>{data.message}</h1>, {
+        autoClose: 1000,
+      });
+    }
+
+    if (data && !data.errorCode) {
+      toast.success(<h1>{data.message}</h1>, {
+        autoClose: 1000,
+      });
+
+      setTimeout(() => {
+        router.back();
+      }, 1000);
+    }
+
+    console.log(data, error);
+  }, [data, error]);
 
   return (
     <div>
+      <ToastContainer position="top-center" />
       <form onSubmit={handleSubmit(onValid)} className="mb-8 space-y-2">
         <Input
           label="이름"
