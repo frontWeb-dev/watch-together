@@ -2,9 +2,11 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import { useEffect } from "react";
+import { signUpAPI } from "@/api/users";
 
 interface SignUpForm {
-  name: string;
+  nickname: string;
   email: string;
   password: string;
   passwordConfirm: string;
@@ -15,11 +17,17 @@ export default function SignInForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<SignUpForm>({ mode: "onChange" });
 
-  const onValid = (formData: SignUpForm) => {
-    console.log(formData);
+  const onValid = async (formData: SignUpForm) => {
+    const body = {
+      email: formData.email,
+      nickname: formData.nickname,
+      password: formData.password,
+    };
+    await signUpAPI(body).then((res) => console.log(res));
   };
 
   return (
@@ -27,14 +35,14 @@ export default function SignInForm() {
       <form onSubmit={handleSubmit(onValid)} className="mb-8 space-y-2">
         <Input
           label="이름"
-          register={register("name", {
+          register={register("nickname", {
             required: "이름을 입력하세요",
           })}
           type="text"
           name="name"
           placeholder="Nick name"
         >
-          {errors.name?.message}
+          {errors.nickname?.message}
         </Input>
         <Input
           label="이메일"
@@ -73,10 +81,10 @@ export default function SignInForm() {
           label="비밀번호 확인"
           register={register("passwordConfirm", {
             required: "비밀번호를 한번 더 입력하세요",
-            validate: {
-              matchPassword: (value, formValues) => {
-                return value !== formValues.password && "비밀번호가 일치하지 않습니다";
-              },
+            validate: (val: string) => {
+              if (watch("password") != val) {
+                return "비밀번호가 일치하지 않습니다.";
+              }
             },
           })}
           type="password"
