@@ -20,3 +20,65 @@ model Users {
   roles               String?
   status              String?
 }
+
+model Party {
+  id                 Int            @id @default(autoincrement())
+  createDt           DateTime       @default(now())
+  updateDt           DateTime       @updatedAt
+  leader_nickname    String?
+  leader_verify      Boolean
+  ott_id             Int
+  party_full         Boolean
+  party_ott_id       String
+  party_ott_password String
+  payDt              DateTime?
+  title              String
+  body               String
+  people             Int?
+  PartyMember        PartyMember[]
+  InviteParty        InviteParty[]
+  Notification       Notification[]
+}
+
+model PartyMember {
+  id          Int      @id @default(autoincrement())
+  createDt    DateTime @default(now())
+  updateDt    DateTime @updatedAt
+  party       Party    @relation(fields: [partyId], references: [id])
+  partyId     Int
+  leader      Boolean
+  alert_check Boolean
+  nick_name   String
+
+  @@index([partyId])
+}
+
+model InviteParty {
+  id                Int      @id @default(autoincrement())
+  createDt          DateTime @default(now())
+  updateDt          DateTime @updatedAt
+  accept            Boolean
+  leader            Boolean
+  limit_dt          DateTime
+  receiver_nickname String
+  receiver_uuid     String
+  party             Party    @relation(fields: [partyId], references: [id])
+  partyId           Int
+
+  @@index([partyId])
+}
+
+model Notification {
+  id                       Int      @id @default(autoincrement())
+  createDt                 DateTime @default(now())
+  updateDt                 DateTime @updatedAt
+  user_email               String
+  notification_expired_dt  DateTime
+  notification_invite_uuid String
+  notification_text        String
+  notification_type        String
+  party                    Party    @relation(fields: [partyId], references: [id])
+  partyId                  Int
+
+  @@index([partyId])
+}
