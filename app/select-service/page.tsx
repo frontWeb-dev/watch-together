@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
+import { joinClass } from "@/libs/client/utils";
 import { services } from "@/mocks/service";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,7 +10,7 @@ export default function Page() {
   const router = useRouter();
   const [ottId, setOttId] = useState(0);
   const searchParams = useSearchParams();
-  const role = searchParams.get("role");
+  const role = searchParams?.get("role");
 
   const clickNext = () => {
     // 파티장 -> 파티 등록 페이지, 파티원 -> 파티 리스트
@@ -26,7 +27,10 @@ export default function Page() {
           <div
             key={service.id}
             onClick={() => setOttId(service.id)}
-            className="flex w-[90%] flex-col justify-center rounded-xl border bg-slate-50 py-5 text-center shadow-md"
+            className={joinClass(
+              "flex w-[90%] cursor-pointer flex-col justify-center rounded-xl border bg-slate-50 py-5 text-center shadow-md",
+              ottId === service.id ? "border-2 border-blue-500" : ""
+            )}
           >
             <h3 className="text-lg font-bold">{service.name}</h3>
             {ottId === service.id && (

@@ -29,7 +29,7 @@ export default function SignInForm() {
       toast.success(<h1>{data.message}</h1>);
 
       setTimeout(() => {
-        router.push("/party");
+        router.push("/select-role");
       }, 1000);
     }
     if (data && data.errorCode) {
