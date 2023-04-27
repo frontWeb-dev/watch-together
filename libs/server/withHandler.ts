@@ -13,7 +13,6 @@ interface ConfigType {
 
 export function withHandler({ methods, handler }: ConfigType) {
   return async function (req: NextApiRequest, res: NextApiResponse): Promise<any> {
-    console.log(req);
     if (req.method && !methods.includes(req.method as any)) {
       return res.status(405).end();
     }
