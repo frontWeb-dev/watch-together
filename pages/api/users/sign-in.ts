@@ -35,7 +35,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   await req.session.save();
 
   res.status(200).json({
-    email: user.email,
+    user: {
+      email: user.email,
+      nickname: user.nickname,
+      cash: user.cash,
+    },
     message: "로그인에 성공하였습니다.",
   });
 }
