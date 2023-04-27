@@ -15,7 +15,7 @@ model Users {
   email               String   @unique
   nickname            String   @unique
   password            String
-  cash                BigInt
+  cash                Int
   reset_passsword_key String?
   roles               String?
   status              String?

@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import client from "@/libs/server/client";
 import { withHandler } from "@/libs/server/withHandler";
 import bcrypt from "bcrypt";
+import { withApiSession } from "@/libs/server/withSession";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { email, password } = req.body;
@@ -27,13 +28,21 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     });
   }
 
+  req.session.user = {
+    id: user.id,
+  };
+
+  await req.session.save();
+
   res.status(200).json({
     email: user.email,
     message: "로그인에 성공하였습니다.",
   });
 }
 
-export default withHandler({
-  methods: ["POST"],
-  handler,
-});
+export default withApiSession(
+  withHandler({
+    methods: ["POST"],
+    handler,
+  })
+);
